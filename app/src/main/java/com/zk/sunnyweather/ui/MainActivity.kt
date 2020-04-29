@@ -1,7 +1,8 @@
-package com.zk.sunnyweather
+package com.zk.sunnyweather.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.zk.sunnyweather.R
 
 class MainActivity : AppCompatActivity() {
 
