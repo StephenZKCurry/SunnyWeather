@@ -1,5 +1,6 @@
 package com.zk.sunnyweather.ui.place
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,17 +8,34 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zk.sunnyweather.R
 import com.zk.sunnyweather.logic.model.Place
+import com.zk.sunnyweather.ui.weather.WeatherActivity
 
 /**
  *    desc   : 城市列表Adapter
  *    author : zhukai
  *    date   : 2020/4/29
  */
-class PlaceAdapter(private val placeList: List<Place>) :
+class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: List<Place>) :
     RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_place, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val context = parent.context
+        val view = LayoutInflater.from(context).inflate(R.layout.item_place, parent, false)
+        val holder = ViewHolder(view)
+        holder.itemView.setOnClickListener {
+            val position = holder.adapterPosition
+            val place = placeList[position]
+            val intent = Intent(context, WeatherActivity::class.java).apply {
+                putExtra("location_lng", place.location.lng)
+                putExtra("location_lat", place.location.lat)
+                putExtra("place_name", place.name)
+                // 保存选中城市
+                fragment.viewModel.savePlace(place)
+            }
+            context.startActivity(intent)
+        }
+        return holder
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val place = placeList[position]
