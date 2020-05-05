@@ -11,7 +11,7 @@
         android:layout_height="70dp">
 
         <Button
-            android:id="@+id/btnBack"
+            android:id="@+id/btnShowDrawer"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
