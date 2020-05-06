@@ -56,7 +56,7 @@ class WeatherActivity : AppCompatActivity() {
                 // 隐藏软键盘
                 val manager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 manager.hideSoftInputFromWindow(
-                    currentFocus?.windowToken,
+                    drawerLayout.windowToken,
                     InputMethodManager.HIDE_NOT_ALWAYS
                 )
             }
